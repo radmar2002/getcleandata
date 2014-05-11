@@ -165,7 +165,7 @@ head(cast_data_step5,10)
 dim(cast_data_step5)
 
 ##  Export from R the tidy data set into a tab delimited .txt file
-write.table(cast_data_step5, "tidy.txt", sep="\t")
+write.table(cast_data_step5, "tidy.txt", row.names=FALSE, col.names=TRUE, sep="\t")
 
 
 # should check this...
