@@ -18,10 +18,12 @@
 
 ### Prepare the workspace
 
-rm(list=ls())                      ## clean memory
-git_dir <- getwd(); git_dir        ## check if we are in the git clone of the project
-list.files()                       ## check the content of the folder
-#install.packages("reshape")       ## we need this library for the operations in Step 5 ; reshape2 package is another option
+rm(list=ls())                                   ## clean memory
+git_dir <- "D:/WORK_2014/Certification_Data_Science/repos/getcleandata"
+if(!file.exists(git_dir)){dir.create(git_dir)}  ## check if forlder already exists
+setwd(git_dir)                                  ## set working directory in the git clone of the project
+list.files()                                    ## check the content of the folder
+#install.packages("reshape")                    ## we need this library for the operations in Step 5 ; reshape2 package is another option
 
 ### Download and extract the data on the local machine
 
@@ -33,6 +35,7 @@ unzipfolder <- unzip(temp); unzipfolder             ## use unzip() function to e
 unlink(temp)                                        ## remove the temp file via unlink()
 list.files()                                        ## check the new content of the folder
 
+dateDownloaded <- date(); dateDownloaded            ## [1] "Sun May 11 13:18:57 2014"  date of download will apear in README file  
 
 ### Inspect the content to learn more about the data within 
 
@@ -50,13 +53,13 @@ list_train <- list.files(main_dir, pattern = "*train.txt$",full.names=TRUE, recu
 list_test <- list.files(main_dir, pattern = "*test.txt$",full.names=TRUE, recursive=TRUE)
 
 for(fl in list_train){
-        curfile <- read.table(fl, header=FALSE, sep="")   ##  sep = "" (the default for read.table) the separator is ‘white space’, that is one or !more spaces
+        curfile <- read.table(fl, quote ="", header=FALSE, sep="")   ##  sep = "" the separator is ‘white space’, that is one or !!more spaces
         print(fl)
         print(dim(curfile))
 }
 
 for(fl in list_test){
-        curfile <- read.table(fl, header=FALSE, sep="")   ##  sep = "" (the default for read.table) the separator is ‘white space’, that is one or !more spaces
+        curfile <- read.table(fl, quote ="", header=FALSE, sep="")   
         print(fl)
         print(dim(curfile))
 }
@@ -67,7 +70,8 @@ for(fl in list_test){
 all_txt_files <- list.files(git_dir, pattern="*txt$" , full.names=TRUE, recursive=TRUE)
 all_txt_files[2]
 
-features_file <- read.table(all_txt_files[2], sep="", col.names=c("Code","Name"))
+features_file <- read.table(paste(git_dir, "UCI HAR Dataset/features.txt",sep="/"), 
+                            sep="", quote ="", col.names=c("Code","Name"))
 head(features_file)
 
 features_file[grep("mean|std",features_file$Name),]
@@ -98,26 +102,29 @@ col_classes    ##  This is the value for the colClasses argument
 
 ### 1. Merges the training and the test sets to create one data set.
 
-subject_test <- read.table(all_txt_files[14], header=FALSE, sep="") 
-y_test <- read.table(all_txt_files[16], header=FALSE, sep="") 
-X_test <- read.table(all_txt_files[15], header=FALSE, sep="", colClasses=col_classes) 
+subject_test <- read.table(paste(git_dir, "UCI HAR Dataset/test/subject_test.txt", sep="/"), header=FALSE, sep="") 
+y_test <- read.table(paste(git_dir, "UCI HAR Dataset/test/y_test.txt", sep="/"), header=FALSE, sep="") 
+X_test <- read.table(paste(git_dir, "UCI HAR Dataset/test/X_test.txt", sep="/"), header=FALSE, sep="", colClasses=col_classes) 
 test_set <- data.frame(subject_test, y_test, X_test)
+rm("subject_test", "y_test", "X_test")      ## release memory space
 
-subject_train <- read.table(all_txt_files[26], header=FALSE, sep="") 
-y_train <- read.table(all_txt_files[28], header=FALSE, sep="") 
-X_train <- read.table(all_txt_files[27], header=FALSE, sep="", colClasses=col_classes) 
+subject_train <- read.table(paste(git_dir, "UCI HAR Dataset/train/subject_train.txt", sep="/"), header=FALSE, sep="") 
+y_train <- read.table(paste(git_dir, "UCI HAR Dataset/train/y_train.txt", sep="/"), header=FALSE, sep="") 
+X_train <- read.table(paste(git_dir, "UCI HAR Dataset/train/X_train.txt", sep="/"), header=FALSE, sep="", colClasses=col_classes) 
 train_set <- data.frame(subject_train, y_train, X_train)
+rm("subject_train", "y_train", "X_train")   ## release memory space
+
 
 data_step2 <- rbind(train_set, test_set) 
 head(data_step2)
-
+rm("train_set", "test_set")                 ## release memory space
 
 ### 3. Uses descriptive activity names to name the activities in the data set
 ### Replace row entries with activity english names (as provided in the data)
 
 data_step3 <- data_step2
 class(data_step3[,2]); str(data_step3[,2])
-activity_labels <- read.table(all_txt_files[1], header=FALSE, sep="") 
+activity_labels <- read.table(paste(git_dir, "UCI HAR Dataset/activity_labels.txt", sep="/"), header=FALSE, sep="") 
 activity_labels_txt <- as.character(activity_labels[,2])
 data_step3[,2] <- factor(data_step3[,2], levels=1:6, labels=activity_labels_txt)
 class(data_step3[,2]); str(data_step3[,2])
@@ -150,6 +157,9 @@ head(data_step4)
 
 ## Step 5: Of those columns that reflect the mean and standard deviation of the data, 
 ## calculate the mean for each person for each activity of that column.
+
+#### Approach NO 1.
+
 data_step5 <- data_step4
 head(data_step5)
 dim(data_step5)
@@ -163,6 +173,30 @@ dim(melted_data_step5)
 cast_data_step5 <- cast(melted_data_step5, subject_ID + activity ~ variable, mean)
 head(cast_data_step5,10)
 dim(cast_data_step5)
+
+
+#### Approach NO 2.
+
+data_step5b <- data_step4
+head(data_step5b)
+dim(data_step5b)
+
+## Using data.table package and key will make the aggregations faster than (any) other 
+## alternative procedures e.g. aggregate, plyr:ddply, reshape2:melt and cast, classic "for" loop
+## vignette("datatable-timings")
+
+#install.packages("data.table") 
+library(data.table)
+
+DT <- data.table(data_step5b, key=c("subject_ID", "activity"))  ## create a 2-column key
+str(DT)
+tables()
+
+cast_data_step5b <- DT[,lapply(.SD, mean(..., na.rm=TRUE)), by=c("subject_ID", "activity")]
+as.data.frame(cast_data_step5b)[1:5,1:5] == cast_data_step5[1:5,1:5]
+
+DT[,lapply(.SD, mean(..., na.rm=TRUE)), by=c("subject_ID", "activity")]
+DT[,lapply(.SD, mean), by=c("subject_ID", "activity")]   ## apply mean through columns by group
 
 ##  Export from R the tidy data set into a tab delimited .txt file
 write.table(cast_data_step5, "tidy.txt", row.names=FALSE, col.names=TRUE, sep="\t")
