@@ -17,13 +17,13 @@
 
 
 
-### Prepare the workspace
+### Prepare the work place directory
 
 rm(list=ls()) ## clean memory
 ## if the directory is not explicitlly specified 
 ## the script will run in curent directory
-#gitDir <- "D:/WORK_2014/Certification_Data_Science/repos/getcleandata"
-gitDir <- "d:/COURSERA_DATA_SCIENCE/Getting_and_Cleaning_Data/Course_Project/getcleandata/"
+gitDir <- "D:/WORK_2014/Certification_Data_Science/repos/getcleandata"
+#gitDir <- "d:/COURSERA_DATA_SCIENCE/Getting_and_Cleaning_Data/Course_Project/getcleandata/"
 #gitDir <- ""
 if(gitDir!=""){
         setwd(gitDir)                               ## set working directory in the git clone of the project
@@ -42,12 +42,12 @@ if("data.table" %in% rownames(installed.packages()) == FALSE){
 ### Download and extract the data on the local machine
 
 ## set the zip file URL source
-sourceUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-temp <- tempfile()                                  ## create a temp. file name
-download.file(sourceUrl ,temp)                      ## use download.file() to fetch the zip file into the temp. file
-unzipfolder <- unzip(temp)                          ## use unzip() function to extract the target from temp. file
-unlink(temp)                                        ## remove the temp file via unlink()
-list.files()                                        ## check the new content of the folder
+# sourceUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+# temp <- tempfile()                                  ## create a temp. file name
+# download.file(sourceUrl ,temp)                      ## use download.file() to fetch the zip file into the temp. file
+# unzipfolder <- unzip(temp)                          ## use unzip() function to extract the target from temp. file
+# unlink(temp)                                        ## remove the temp file via unlink()
+# list.files()                                        ## check the new content of the folder
 
 dateDownloaded <- date(); dateDownloaded            ## [1] "Sun May 11 13:18:57 2014"  date of download will apear in README file  
 
