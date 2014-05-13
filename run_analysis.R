@@ -41,13 +41,13 @@ if("data.table" %in% rownames(installed.packages()) == FALSE){
 
 ### Download and extract the data on the local machine
 
-## set the zip file URL source
-# sourceUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-# temp <- tempfile()                                  ## create a temp. file name
-# download.file(sourceUrl ,temp)                      ## use download.file() to fetch the zip file into the temp. file
-# unzipfolder <- unzip(temp)                          ## use unzip() function to extract the target from temp. file
-# unlink(temp)                                        ## remove the temp file via unlink()
-# list.files()                                        ## check the new content of the folder
+# set the zip file URL source
+sourceUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+temp <- tempfile()                                  ## create a temp. file name
+download.file(sourceUrl ,temp)                      ## use download.file() to fetch the zip file into the temp. file
+unzipfolder <- unzip(temp)                          ## use unzip() function to extract the target from temp. file
+unlink(temp)                                        ## remove the temp file via unlink()
+list.files()                                        ## check the new content of the folder
 
 dateDownloaded <- date(); dateDownloaded            ## [1] "Sun May 11 13:18:57 2014"  date of download will apear in README file  
 
