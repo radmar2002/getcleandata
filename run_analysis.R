@@ -9,8 +9,8 @@
 
 ### R script called run_analysis.R does the following: 
 ###
-### 1. Merges the training and the test sets to create one data set.
-### 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+### 1. Extracts only the measurements on the mean and standard deviation for each measurement. 
+### 2. Merges the training and the test sets to create one data set.
 ### 3. Uses descriptive activity names to name the activities in the data set
 ### 4. Appropriately labels the data set with descriptive activity names. 
 ### 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
@@ -58,7 +58,7 @@ featuresFile <- read.table(paste(gitDir, "UCI HAR Dataset/features.txt",sep="/")
 #head(featuresFile)
 
 
-### 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+### 1. Extracts only the measurements on the mean and standard deviation for each measurement. 
 
 ## This is the mapping (code,name) for the measures of mean and standard deviation. 
 ## and not including the weighted averages (e.g. meanFreq) angle variables wich are
@@ -75,7 +75,7 @@ columnsClasses <- rep("NULL", 561)
 columnsClasses[aimedColumns] <- "numeric"  ##  'columnsClasse' is the given value for the colClasses argument               
 
 
-### 1. Merges the training and the test sets to create one data set.
+### 2. Merges the training and the test sets to create one data set.
 
 subjectTest <- read.table(paste(gitDir, "UCI HAR Dataset/test/subject_test.txt", sep="/"), header=FALSE, sep="") 
 yTest <- read.table(paste(gitDir, "UCI HAR Dataset/test/y_test.txt", sep="/"), header=FALSE, sep="") 
