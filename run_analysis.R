@@ -1,6 +1,6 @@
-##################################################################
-######                  run_analysis.R                      ######            
-##################################################################
+###############################################################################
+######                          run_analysis.R                           ######            
+###############################################################################
 
 ### Author: Marius Radu
 ### Mail: radu_marius_florin@yahoo.com
@@ -17,7 +17,7 @@
 
 
 
-### Prepare the work place directory
+### Prepare the working directory
 
 rm(list=ls()) ## clean memory
 ## if the directory is not explicitlly specified 
@@ -134,8 +134,8 @@ names(dataStep4) <- c("subjectID", "activity", aimedColumnsNames)
 
 library(data.table)
 
-DT <- data.table(dataStep4, key=c("subjectID", "activity"))                          ## create a 2-column key
-# str(DT); tables()                                                                  ## inspect data structures
+DT <- data.table(dataStep4, key=c("subjectID", "activity"))         ## create a 2-column key
+# str(DT); tables()                                                 ## inspect data structures
 dataStep5 <- DT[,lapply(.SD, mean), by=c("subjectID", "activity")]  ## apply mean through columns by group
 
 ##  Export from R the tidy data set into a tab delimited .txt file
