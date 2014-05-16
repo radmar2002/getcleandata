@@ -7,6 +7,7 @@ Peer Assessment Project for Coursera Course:  Getting and Cleaning Data
 ===============================================================
 
 
+
 The repo includes the following files:
 ---------------------------------------------------------------
 

@@ -15,7 +15,6 @@
 ### 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 
-
 ### Prepare the working directory
 
 rm(list=ls()) ## clean memory
