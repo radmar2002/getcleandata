@@ -17,7 +17,13 @@ The experiments have been carried out with a group of 30 volunteers within an ag
 
 **subjectID** - contains the ID for all 30  volunteers involved in experiment
 
-**activity** - is a cathegorical variable which contains the type of activity performed diring the experiments (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) 
+**activity** - is a cathegorical variable which contains the type of activity performed diring the experiments:
+- WALKING
+- WALKING_UPSTAIRS
+- WALKING_DOWNSTAIRS
+- SITTING
+- STANDING
+- LAYING 
 
 
 Using its embedded accelerometer and gyroscope, experiments authors (Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita) captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. During the experiments Fast Fourier Transform (FFT) was applied to some of these signals. The signals were used to estimate variables of the feature vector for each pattern: 'variableNameX', 'variableNameY', 'variableNameZ' is used to denote 3-axial signals in the X, Y and Z directions.
@@ -101,15 +107,20 @@ Data Sescription
 - it contains the tidy data obtained by processing data from [https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip), using the script **run_analysis.R**
 
 
-
 Transformations performed to clean up the data 
 ---------------------------------------------------------------
 
 <br>**Prepare the working directory**
+
 <br>**Download and extract the data on the local machine**
+
 <br>**Extracts only the measurements on the mean and standard deviation for each measurement.**
+
 <br>**Merges the training and the test sets to create one data set.**
+
 <br>**Uses descriptive activity names to name the activities in the data set**
+
 <br>**Appropriately labels the data set with descriptive activity names.**
+
 <br>**Creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
 
