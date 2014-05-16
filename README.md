@@ -10,10 +10,10 @@ Peer Assessment Project for Coursera Course:  Getting and Cleaning Data
 The repo includes the following files:
 ---------------------------------------------------------------
 
-- 'README.md'
-- 'CodeBook.md'
-- 'run_analysis.R'
-- 'tidy.txt'
+- `README.md`
+- `CodeBook.md`
+- `run_analysis.R`
+- `tidy.txt`
 
 
 The script called run_analysis.R script does the following:
@@ -54,4 +54,4 @@ This dataset is distributed AS-IS and no responsibility implied or explicit can 
 For more information about **tidy.txt* dataset contact: `radu_marius_florin@yahoo.com`.
 
 
-Last date of download of raw data directory is Fri May 16 18:05:49 2014
+Last date of download of the raw data directory is Fri May 16 18:05:49 2014
