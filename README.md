@@ -7,7 +7,6 @@ Course Project for Coursera Course:  Getting and Cleaning Data
 ===============================================================
 
 
-
 The repo includes the following files:
 ---------------------------------------------------------------
 
@@ -28,6 +27,16 @@ The script called run_analysis.R script does the following:
 7. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 
+The run_analysis.R script can be used as follows:
+```{r}
+<path>/Rscript run_analysis.R
+
+# or
+
+<path>/R CMD run_analysis.R
+```
+
+
 About the data set called tidy.txt:
 ---------------------------------------------------------------
 - it is a tab delimited text file 
@@ -42,4 +51,7 @@ The data dataset used for script development is part of the following publicatio
 
 This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
-For more information about tidy.txt dataset contact: <radu_marius_florin@yahoo.com>.
+For more information about **tidy.txt* dataset contact: `radu_marius_florin@yahoo.com`.
+
+
+Last date of download of raw data directory is Fri May 16 18:05:49 2014

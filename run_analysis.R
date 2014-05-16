@@ -48,7 +48,10 @@ unzipfolder <- unzip(temp)                          ## use unzip() function to e
 unlink(temp)                                        ## remove the temp file via unlink()
 list.files()                                        ## check the new content of the folder
 
-dateDownloaded <- date(); dateDownloaded            ## [1] "Sun May 11 13:18:57 2014"  date of download will apear in README file  
+
+fileConn<-file("README.md", open="a")               ## the last date of download will apear in README file  
+writeLines(paste("\nLast date of download of raw data directory is", date()), fileConn)
+close(fileConn)
 
 
 ### load the features file
@@ -64,7 +67,7 @@ featuresFile <- read.table(paste(gitDir, "UCI HAR Dataset/features.txt",sep="/")
 ## including mean measures e.g angle(tBodyAccJerkMean),gravityMean)
 ## featuresFile[grep("mean\\(|Mean|std",featuresFile$Name),]  
 
-## Identificaton of measures that are measures of mean and standard deviation will reduce the number of columns in the data.
+## Identificaton of measures for the means and standard deviations will reduce the number of columns in the data.
 labelsPattern <- "mean\\(|std"
 aimedColumns <- featuresFile[grep(labelsPattern, featuresFile$Name),1]
 
