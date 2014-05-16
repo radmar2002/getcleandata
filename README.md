@@ -1,5 +1,5 @@
 ===============================================================
-Course Project for Coursera Course:  Getting and Cleaning Data
+Peer Assessment Project for Coursera Course:  Getting and Cleaning Data
 ===============================================================
 <p>Marius Florin RADU
 <br>Cluj-Napoca, Cluj, ROMANIA
