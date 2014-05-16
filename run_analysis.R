@@ -17,7 +17,7 @@
 
 
 
-### Prepare the workspace
+### Prepare the working directory
 
 rm(list=ls()) ## clean memory
 ## if the directory is not explicitlly specified 
